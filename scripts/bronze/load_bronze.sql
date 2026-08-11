@@ -8,9 +8,7 @@ BEGIN
 	BEGIN TRY 
 		SET @batch_start_time = GETDATE();
 		PRINT'LOADING BRONZE LAYER....'
-		SET @batch_end_time = GETDATE()
-		PRINT'THE TOTAL TIME OF LOADING DATA IS : '+CAST(DATEDIFF(second,@batch_start_time,@batch_end_time) AS NVARCHAR)+' second' ;
-	    -- START LOAD CRM TABLES --
+		-- START LOAD CRM TABLES --
 
 		-- LOAD CUST_INFO TABLES
 		SET @start_time = GETDATE()	;
@@ -97,6 +95,10 @@ BEGIN
 		);
 		SET @end_time = GETDATE();
 		PRINT 'THE TIME LOADED OF PX_CAT_G1V2 TABLE IS : '+ CAST(DATEDIFF(second,@start_time,@end_time) AS NVARCHAR) + ' second';
+		SET @batch_end_time = GETDATE()
+		PRINT'==========================';
+		PRINT'THE TOTAL TIME OF LOADING DATA FROM BRONZE LAYER IS : '+CAST(DATEDIFF(second,@batch_start_time,@batch_end_time) AS NVARCHAR)+' second' ;
+	   	PRINT'==========================';
 
 		-- END LOAD ERP TABLES --
 	END TRY 
